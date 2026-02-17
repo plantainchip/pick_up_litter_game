@@ -11,7 +11,7 @@ kaplay({
     plugins: [crew]
 })
 
-debug.inspect = false
+debug.inspect = true
 // onClick(() => addKaboom(mousePos()));
 setGravity(1600);
 
@@ -24,6 +24,26 @@ loadSprite("05grass","./sprites/780x360sprites/grass.png")
 loadSprite("player","./sprites/780x360sprites/player.png")
 loadSprite("foodbox","./sprites/780x360sprites/foodbox.png")
 loadSprite("can1","./sprites/780x360sprites/greencan.png")
+loadSprite("playerAnims","./sprites/780x360sprites/player_animations_bike_jump_fall.png",{
+    sliceX: 6,
+    sliceY: 1,
+    anims: {
+        bike: {
+            from: 0,
+            to: 3,
+            loop: true,
+        },
+        jump: {
+            from:4,
+            to: 4,
+        },
+        fall: {
+            from: 5,
+            to: 5,
+        }
+    }
+});
+
 
 
 add([sprite("00sky")])
@@ -79,7 +99,7 @@ const grasspanel2 = add([
 ])
 
 const floor1 = add([
-    pos(0, 320),
+    pos(0, 330),
     rect(780, 10),
     body({ isStatic: true }),
     area(),
@@ -121,17 +141,19 @@ onUpdate(() => {
 
 })
 
-
-
-
-const bufferfloor = add([
+const floor2 = add([
     pos(0, 300),
-    rect(780, 20),
-    area({isSensor:true}),
+    rect(780, 10),
+    body({ isStatic: true }),
+    area({}),
     color(20,120,225),
+    platformEffector({
+        ignoreSides: [UP,LEFT,RIGHT]
+    }),
     opacity(0),
-    "bufferfloor"
+    "floor2"
 ])
+
 
 const seawallfloor = add([
     pos(0, 220),
@@ -148,41 +170,62 @@ const seawallfloor = add([
 
 
 const player = add([
-    sprite("player"), 
-    pos(100, 240), 
+    sprite("playerAnims"), 
+    pos(100, 300), 
     area(),
     body(),
     z(1),
+    animate(),
     "bean"
 ]);
 
+const playerPlayBike = () => {
+    // obj.play() will reset to the first frame of the animation
+    // so we want to make sure it only runs when the current animation is not "run"
+    if (player.isGrounded() && player.getCurAnim().name !== "bike") {
+        player.play("bike");
+    }
+};
+
+onKeyRelease(["w"], () => {
+    playerPlayBike();
+});
+
+player.onGround(()=> {
+    player.play("bike")
+})
 
 // this here for jump -------
 onKeyPress("w", () => {
     if(player.isGrounded()){
         player.jump(500);
+        player.play("jump");
     }
 })
+onKeyPress("s", () => {
+    const p = player.curPlatform();
+    if (p != null && p.has("platformEffector")) {
+        p.platformIgnore.add(player);
+    }
+});
 
 onUpdate(()=> {
+    if(player.isJumping()){
+    }
     if(player.isFalling()){
         setGravity(5000);
     } else {
         setGravity(1600);
+
     }
 
-    // for jump buffering
-    if(isKeyPressed("w") && player.isFalling() && player.isColliding(bufferfloor)){
-        console.log("jump again" + dt())
-        player.jump(500)
-    }
 })
 
 // this here for jump -------
 
 function SpawnPlatforms(){
     const platform = add([
-        pos(740, 280),
+        pos(740, 270),
         rect(180, 30),
         body({ isStatic: true }),
         area({isSensor: true}),
@@ -210,9 +253,17 @@ onCollideUpdate("bean", "floor1", (a,b,c) => {
     player.moveTo(200, 300, 100)
 })
 
+
 onCollideUpdate("bean", "platform", (a,b,c) => {
     player.moveTo(200, player.pos.y, 100)
 })
+
+onCollideUpdate("bean", "floor2", (a,b,c) => {
+    player.moveTo(200, player.pos.y, 100)
+})
+
+
+
 
 // onUpdate(() => {
 //     debug.log(player.pos.x)
