@@ -11,7 +11,7 @@ kaplay({
     plugins: [crew]
 })
 
-debug.inspect = true
+debug.inspect = false
 // onClick(() => addKaboom(mousePos()));
 setGravity(1600);
 
@@ -24,6 +24,10 @@ loadSprite("05grass","./sprites/780x360sprites/grass.png")
 loadSprite("player","./sprites/780x360sprites/player.png")
 loadSprite("foodbox","./sprites/780x360sprites/foodbox.png")
 loadSprite("can1","./sprites/780x360sprites/greencan.png")
+loadSprite("bench","./sprites/780x360sprites/bench1.png")
+loadSprite("stall","./sprites/780x360sprites/stall1.png")
+loadSprite("wood","./sprites/780x360sprites/wood1.png")
+
 loadSprite("playerAnims","./sprites/780x360sprites/player_animations_bike_jump_fall.png",{
     sliceX: 6,
     sliceY: 1,
@@ -62,6 +66,18 @@ const cloudpanel2 = add([
     move(LEFT, 8),
 ])
 
+const shipspanel1 = add([
+    sprite("02ships"),
+    pos(0,0),
+    move(LEFT, 8),
+])
+
+const shipspanel2 = add([
+    sprite("02ships"),
+    pos(780,0),
+    move(LEFT, 8),
+])
+
 const oceanpanel1 = add([
     sprite("03atlantic"),
     pos(0,0),
@@ -90,12 +106,14 @@ const grasspanel1 = add([
     sprite("05grass"),
     pos(0,0),
     move(LEFT, 110),
+    z(2)
 ])
 
 const grasspanel2 = add([
     sprite("05grass"),
     pos(780,0),
     move(LEFT, 110),
+    z(2)
 ])
 
 const floor1 = add([
@@ -123,6 +141,13 @@ onUpdate(() => {
     }
     if(oceanpanel2.pos.x < (-779)){
         oceanpanel2.moveTo(780,0)
+    }
+
+    if(shipspanel1.pos.x < (-779)){
+        shipspanel1.moveTo(780,0)
+    }
+    if(shipspanel2.pos.x < (-779)){
+        shipspanel2.moveTo(780,0)
     }
 
     if(seawallpanel1.pos.x < (-779)){
@@ -225,11 +250,12 @@ onUpdate(()=> {
 
 function SpawnPlatforms(){
     const platform = add([
-        pos(740, 270),
-        rect(180, 30),
+        sprite("bench"),
+        pos(760, 273),
+        // rect(180, 30),
         body({ isStatic: true }),
         area({isSensor: true}),
-        color(0, 100, 70),
+        // color(0, 100, 70),
         move(LEFT,100),
         offscreen({destroy: true}),
         platformEffector({
