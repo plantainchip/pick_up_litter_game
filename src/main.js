@@ -116,15 +116,15 @@ const grasspanel2 = add([
     z(2)
 ])
 
-const floor1 = add([
-    pos(0, 330),
+const floorbot = add([
+    pos(0, 338),
     rect(780, 10),
     body({ isStatic: true }),
     area(),
     color(225, 100, 70),
     opacity(0),
     // move(LEFT, 100),
-    "floor1"
+    "floorbot"
 ])
 
 
@@ -197,7 +197,9 @@ const seawallfloor = add([
 const player = add([
     sprite("playerAnims"), 
     pos(100, 300), 
-    area(),
+    // area({shape: new Circle(vec2(0),10)}),
+    area({shape: new Rect(vec2(6,0), 65, 70)}),
+    anchor("bot"),
     body(),
     z(1),
     animate(),
@@ -249,9 +251,10 @@ onUpdate(()=> {
 // this here for jump -------
 
 function SpawnPlatforms(){
+    // const mid_or_bot = choose([273,310])
     const platform = add([
         sprite("bench"),
-        pos(760, 273),
+        pos(760, 273 ),
         // rect(180, 30),
         body({ isStatic: true }),
         area({isSensor: true}),
@@ -275,7 +278,8 @@ function SpawnPlatforms(){
 SpawnPlatforms()
 
 
-onCollideUpdate("bean", "floor1", (a,b,c) => {
+
+onCollideUpdate("bean", "floorbot", (a,b,c) => {
     player.moveTo(200, 300, 100)
 })
 
