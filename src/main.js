@@ -2,6 +2,10 @@ import kaplay from "kaplay";
 import "kaplay/global";
 import { bicyclePlayer } from "./player-info";
 import { seawallBackground } from "./seawall-background";
+import { spawnGarbage } from "./garbage-info";
+import { spawnPothole } from "./pothole-info";
+import { spawnBench } from "./bench-info";
+
 
 kaplay({
     width: 780,
@@ -9,7 +13,7 @@ kaplay({
     background: [27, 27, 27],
 })
 
-debug.inspect = true
+debug.inspect = false
 
 setGravity(1600);
 
@@ -88,44 +92,7 @@ const bottomroad = add([
 ])
 
 
-function spawnBench(){
-    // const mid_or_bot = choose([273,310])
-    const platform = add([
-        sprite("bench"),
-        pos(760, 273 ),
-        body({ isStatic: true }),
-        area({isSensor: true}),
-        move(LEFT,100),
-        offscreen({destroy: true}),
-        platformEffector({
-            ignoreSides: [UP,LEFT,RIGHT]
-        }),
-        "bench"
-    ])
-    wait(rand(3,10),()=>{
-        spawnBench()
-    })
-}
+
 spawnBench()
-
-let potholePlacementTop = false;
-
-function spawnPothole(){
-    const mid_or_bot = choose([292,325])
-    const platform = add([
-        sprite("pothole"),
-        pos(760, mid_or_bot ),
-        body({ isStatic: true }),
-        area({isSensor: true}),
-        move(LEFT,100),
-        offscreen({destroy: true}),
-        platformEffector({
-            ignoreSides: [DOWN,UP,LEFT,RIGHT]
-        }),
-        "pothole"
-    ])
-    wait(rand(3,10),()=>{
-        spawnPothole()
-    })
-}
 spawnPothole()
+spawnGarbage()

@@ -21,7 +21,7 @@ export function bicyclePlayer(){
     }
     };
 
-    onKeyRelease(["space"], () => {
+    onKeyRelease(["w"], () => {
         playerPlayBike();
     });
 
@@ -30,7 +30,7 @@ export function bicyclePlayer(){
     })
 
     // this here for jump -------
-    onKeyPress("space", () => {
+    onKeyPress("w", () => {
         // console.log(player.curPlatform()._tags.has("bottomroad"))
         // player.collisionIgnore = ["toproad","bench"]
 
@@ -45,11 +45,11 @@ export function bicyclePlayer(){
     })
 
     // onKeyDown("w", () => {
+    //     // const p = player.curPlatform();
     //     // if(player.curPlatform()._tags.has("bottomroad")){
-    //     //     // console.log(player.curPlatform()._tags.has("bottomroad"))
+    //     //     console.log(player.curPlatform()._tags.has("bottomroad"))
+    //     //     setGravityDirection(UP);
     //     // }
-    //     player.moveBy(0,-0.01)
-        
     // });
 
         
@@ -68,32 +68,34 @@ export function bicyclePlayer(){
         } else {
             setGravity(1600);
         }
-        
-        
-
-    })
+        if(player.pos.x != 200){
+            player.moveTo(200,player.pos.y,100)
+        }
+    });
 
     // Collision with floor
     
-    onCollideUpdate("bean", "seawallfloor", (a,b,c) => {
-        player.moveTo(200, player.pos.y, 100)
-    })
+    // onCollideUpdate("bean", "seawallfloor", (a,b,c) => {
+    //     player.moveTo(200, player.pos.y, 100)
+    // })
 
-    onCollideUpdate("bean", "toproad", (a,b,c) => {
-        player.moveTo(200, player.pos.y, 100)
-    })
+    // onCollideUpdate("bean", "toproad", (a,b,c) => {
+    //     player.moveTo(200, player.pos.y, 100)
+    // })
 
-    onCollideUpdate("bean", "bottomroad", (a,b,c) => {
-        player.moveTo(200, player.pos.y, 100)
-    })
+    // onCollideUpdate("bean", "bottomroad", (a,b,c) => {
+    //     player.moveTo(200, player.pos.y, 100)
+    // })
 
-    onCollideUpdate("bean", "bench", (a,b,c) => {
-        player.moveTo(200, player.pos.y, 100)
-    })
+    // onCollideUpdate("bean", "bench", (a,b,c) => {
+    //     player.moveTo(200, player.pos.y, 100)
+    // })
 
-    onCollide("bean", "pothole", () => {
-        addKaboom(vec2(200,player.pos.y - 50))
-    })
+    // onCollide("bean", "pothole", () => {
+    //     addKaboom(vec2(200,player.pos.y - 50))
+    // })
+
+
 
     return player
 
