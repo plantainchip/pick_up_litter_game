@@ -1,6 +1,6 @@
 export function spawnPothole(){
     const mid_or_bot = choose([292,325])
-    const platform = add([
+    const pothole = add([
         sprite("pothole"),
         pos(760, mid_or_bot ),
         body({ isStatic: true }),
@@ -14,6 +14,10 @@ export function spawnPothole(){
     ])
     wait(rand(3,10),()=>{
         spawnPothole()
+    })
+
+    pothole.onCollide("player_bicycle",()=> {
+        debug.log("fall")
     })
 }
 export default {spawnPothole}

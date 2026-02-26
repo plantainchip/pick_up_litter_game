@@ -12,6 +12,16 @@ export function bicyclePlayer(){
         animate(),
         "bean"
     ]);
+
+    const player_bicycle = add([
+        pos(100, 300), 
+        rect(60, 10),
+        area({isSensor:true}),
+        anchor("bot"),
+        follow(player),
+        opacity(0),
+        "player_bicycle"
+    ])
     
 
     // Player default animation function
@@ -71,6 +81,9 @@ export function bicyclePlayer(){
         if(player.pos.x != 200){
             player.moveTo(200,player.pos.y,100)
         }
+        // if(player_bicycle.pos.x != 205){
+        //     player_bicycle.moveTo(205,player_bicycle.pos.y,100)
+        // }
     });
 
     // Collision with floor
@@ -97,7 +110,7 @@ export function bicyclePlayer(){
 
 
 
-    return player
+    return player, player_bicycle
 
 }
 

@@ -116,3 +116,4 @@ onCollide("bean","can1",()=>{
 spawnBench()
 spawnPothole()
 spawnGarbage()
+
