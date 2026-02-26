@@ -31,6 +31,9 @@ loadSprite("bench","./sprites/780x360sprites/bench1.png")
 loadSprite("stall","./sprites/780x360sprites/stall1.png")
 loadSprite("wood","./sprites/780x360sprites/wood1.png")
 loadSprite("pothole","./sprites/780x360sprites/pothole.png")
+loadSprite("progress_bar","./sprites/780x360sprites/progress_bar.png")
+loadSprite("green_bar","./sprites/780x360sprites/green_bar.png")
+
 loadSprite("playerAnims","./sprites/780x360sprites/player_animations_bike_jump_fall.png",{
     sliceX: 6,
     sliceY: 1,
@@ -91,7 +94,24 @@ const bottomroad = add([
     "bottomroad"
 ])
 
+let garbage_picked_up = 0
+const progress_bar = add([
+    sprite("progress_bar"),
+    pos(width()/2,28),
+    anchor("center"),
+])
 
+const green_bar = add([
+    sprite("green_bar"),
+    pos(143,34),
+    scale(1,1)
+])
+
+onCollide("bean","can1",()=>{
+    green_bar.scale = vec2(1,1)
+    garbage_picked_up += 6
+    green_bar.scale = vec2(garbage_picked_up,1)
+})
 
 spawnBench()
 spawnPothole()
