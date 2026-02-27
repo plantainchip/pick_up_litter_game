@@ -16,8 +16,5 @@ export function spawnPothole(){
         spawnPothole()
     })
 
-    pothole.onCollide("player_bicycle",()=> {
-        debug.log("fall")
-    })
 }
 export default {spawnPothole}

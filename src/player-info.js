@@ -15,10 +15,10 @@ export function bicyclePlayer(){
 
     const player_bicycle = add([
         pos(100, 300), 
-        rect(60, 10),
+        rect(50, 10),
         area({isSensor:true}),
         anchor("bot"),
-        follow(player),
+        follow(player,vec2(5,0)),
         opacity(0),
         "player_bicycle"
     ])

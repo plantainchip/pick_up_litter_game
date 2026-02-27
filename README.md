@@ -1,27 +1,19 @@
-# Folder structure
+# to do
 
-- `src` - source code for your kaplay project
-- `dist` - distribution folder, contains your index.html, built js bundle and static assets
+- [ ] lose condition - hit a pothole 3 times and lose 
+- [ ] garbage bins
+- [ ] empty bag mechanic
+- [ ] bag slow down mechanic
+- [ ] title screen
+- [ ] game over screen
+- [ ] add people to seawall randomly
+- [ ] add running dog
 
+### would like to do
+- [ ] add kites
+- [ ] add birds
+- [ ] add 1 new background and transition
+- [ ] pickup item effect
+- [ ] animation for waves
+- [ ] animation for progress bar
 
-## Development
-
-```sh
-$ npm run dev
-```
-
-will start a dev server at http://localhost:8000
-
-## Distribution
-
-```sh
-$ npm run build
-```
-
-will build your js files into `dist/`
-
-```sh
-$ npm run zip
-```
-
-will build your game and package into a .zip file, you can upload to your server or itch.io / newground etc.
