@@ -6,7 +6,10 @@ import { seawallBackground } from "./seawall-background";
 import { spawnGarbage } from "./garbage-info";
 import { spawnPothole } from "./pothole-info";
 import { spawnBench } from "./bench-info";
-
+import { lanes } from "./lanes-info";
+import { headsupdisplay } from "./hud-info";   
+import gameloop from "./gameloop";
+import gameover from "./gameover";
 
 kaplay({
     width: 780,
@@ -62,93 +65,21 @@ loadSprite("playerAnims","./sprites/780x360sprites/player_animations_bike_jump_f
     }
 });
 
-seawallBackground()
-const player = bicyclePlayer()
+scene("game",gameloop);
+scene("gameover",gameover);
 
-const seawallfloor = add([
-    pos(0, 220),
-    rect(780, 10),
-    body({ isStatic: true }),
-    area(),
-    color(20,120,225),
-    platformEffector({
-        ignoreSides: [UP,LEFT,RIGHT]
-    }),
-    opacity(0),
-    "seawallfloor"
-])
-
-const toproad = add([
-    pos(0, 300),
-    rect(780, 10),
-    body({ isStatic: true }),
-    area(),
-    color(20,120,225),
-    platformEffector({
-        ignoreSides: [UP,LEFT,RIGHT]
-    }),
-    opacity(0),
-    "toproad"
-])
-
-const bottomroad = add([
-    pos(0, 338),
-    rect(780, 10),
-    body({ isStatic: true }),
-    area(),
-    color(225, 100, 70),
-    opacity(0),
-    // move(LEFT, 100),
-    "bottomroad"
-])
-
-let garbage_picked_up = 0;
-
-
-const progress_bar = add([
-    sprite("progress_bar"),
-    pos(width()/2,28),
-    anchor("center"),
-])
-
-const green_bar = add([
-    sprite("green_bar"),
-    pos(143,34),
-    scale(1,1)
-])
-
-green_bar.scale = vec2(garbage_picked_up,1)
-
-// score
-const scoreLabel = add([
-    text("0",{
-        size: 24,
-        font: "happy"
-    }),
-    pos(656,22),
-    color(148,123,27),
-    {value:0}
-])
-
-onCollide("bean","can1",()=>{
-    green_bar.scale = vec2(1,1)
-    
-    if(garbage_picked_up == 156){
-        garbage_picked_up
-    } else {
-        garbage_picked_up += 6
-        scoreLabel.value+=1
-        scoreLabel.text = scoreLabel.value
-    }
-    green_bar.scale = vec2(garbage_picked_up,1)
+scene("start",()=>{
+    setBackground(34,97,230)
+    add([
+        text("start"),
+        pos(center()),
+        anchor("center"),
+    ])
+    onKeyPress((key) => {
+        go("game", );
+    })
 })
+onLoad(() => go("start"))
 
-onCollide("player_bicycle","pothole",()=> {
-    garbage_picked_up = 0
-    green_bar.scale = vec2(garbage_picked_up,1)
-})
 
-spawnBench()
-spawnPothole()
-spawnGarbage()
 

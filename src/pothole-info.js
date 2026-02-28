@@ -5,7 +5,7 @@ export function spawnPothole(){
         pos(760, mid_or_bot ),
         body({ isStatic: true }),
         area({isSensor: true}),
-        move(LEFT,100),
+        move(LEFT,200),
         offscreen({destroy: true}),
         platformEffector({
             ignoreSides: [DOWN,UP,LEFT,RIGHT]

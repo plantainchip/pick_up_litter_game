@@ -16,7 +16,7 @@ export function spawnGarbage(){
         pos(775, rand_lane ),
         body({ isStatic: true }),
         area({isSensor: true}),
-        move(LEFT,100),
+        move(LEFT,200),
         offscreen({destroy: true}),
         anchor("bot"),
         platformEffector({

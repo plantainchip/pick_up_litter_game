@@ -5,7 +5,7 @@ export function spawnBench(){
         pos(760, 273 ),
         body({ isStatic: true }),
         area({isSensor: true}),
-        move(LEFT,100),
+        move(LEFT,200),
         offscreen({destroy: true}),
         platformEffector({
             ignoreSides: [UP,LEFT,RIGHT]

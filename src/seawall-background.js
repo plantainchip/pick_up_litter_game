@@ -42,26 +42,26 @@ export function seawallBackground(){
     const seawallpanel1 = add([
         sprite("04seawall"),
         pos(0,0),
-        move(LEFT, 100),
+        move(LEFT, 200),
     ])
 
     const seawallpanel2 = add([
         sprite("04seawall"),
         pos(780,0),
-        move(LEFT, 100),
+        move(LEFT, 200),
     ])
 
     const grasspanel1 = add([
         sprite("05grass"),
         pos(0,0),
-        move(LEFT, 110),
+        move(LEFT, 210),
         z(2)
     ])
 
     const grasspanel2 = add([
         sprite("05grass"),
         pos(780,0),
-        move(LEFT, 110),
+        move(LEFT, 210),
         z(2)
     ])
 
