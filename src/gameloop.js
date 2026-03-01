@@ -5,7 +5,8 @@ import { spawnGarbage } from "./garbage-info";
 import { spawnPothole } from "./pothole-info";
 import { spawnBench } from "./bench-info";
 import { lanes } from "./lanes-info";
-import { headsupdisplay } from "./hud-info";  
+import { headsupdisplay } from "./hud-info"; 
+import { spawnBin } from "./bin-info";
 
 export default function(){
     seawallBackground()
@@ -15,5 +16,6 @@ export default function(){
     spawnBench()
     spawnPothole()
     spawnGarbage()
+    spawnBin()
 }
 

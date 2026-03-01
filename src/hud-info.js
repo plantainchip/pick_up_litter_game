@@ -1,7 +1,7 @@
 import gameover from "./gameover";
+import { bicyclePlayer } from "./player-info";
 
 export function headsupdisplay(){
-    let garbage_picked_up = 0;
 
     const progress_bar = add([
         sprite("progress_bar"),
@@ -15,7 +15,7 @@ export function headsupdisplay(){
         scale(1,1)
     ])
 
-    green_bar.scale = vec2(garbage_picked_up,1)
+    green_bar.scale = vec2(STATE.garbage_picked_up,1)
 
     // score
     const scoreLabel = add([
@@ -31,14 +31,14 @@ export function headsupdisplay(){
     onCollide("bean","can1",()=>{
         green_bar.scale = vec2(1,1)
         
-        if(garbage_picked_up == 156){
-            garbage_picked_up
+        if(STATE.garbage_picked_up == 156){
+            STATE.garbage_picked_up
         } else {
-            garbage_picked_up += 6
+            STATE.garbage_picked_up += 6
             scoreLabel.value+=1
             scoreLabel.text = scoreLabel.value
         }
-        green_bar.scale = vec2(garbage_picked_up,1)
+        green_bar.scale = vec2(STATE.garbage_picked_up,1)
     })
 
     add([
@@ -55,19 +55,47 @@ export function headsupdisplay(){
         color(148,123,27),
         {value:3}
     ])
+   
 
     onCollide("player_bicycle","pothole",()=> {
-        garbage_picked_up = 0
+        STATE.garbage_picked_up = 0
         livesLabel.value-=1
         livesLabel.text = "x"+livesLabel.value
-        green_bar.scale = vec2(garbage_picked_up,1)
+        green_bar.scale = vec2(STATE.garbage_picked_up,1)
         if(livesLabel.value == 0){
             wait(1,()=>{
                 go("gameover")
             })
-            
         }
     })
+
+    let binCollided = false;
+    let pressE = false;
+
+    onCollideUpdate("player_bicycle","bin",()=>{
+        binCollided = true;
+    })
+
+    onCollideEnd("player_bicycle","bin",()=>{
+        binCollided = false;
+    })
+
+    onKeyPress("e",()=>{
+        pressE = true;
+
+        if(binCollided+pressE == 2){
+            debug.log("trash")
+            STATE.garbage_picked_up = 0;
+            green_bar.scale = vec2(STATE.garbage_picked_up,1);
+            //score for bin
+            scoreLabel.value+=100
+            scoreLabel.text = scoreLabel.value
+    }
+    })
+
+    
+
+
 }
 
 export default {headsupdisplay}

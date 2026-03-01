@@ -70,7 +70,7 @@ export function bicyclePlayer(){
         if (p != null && p.has("platformEffector")) {
             p.platformIgnore.add(player);
         }
-    });
+    });    
 
     onUpdate(()=> {
         if(player.isFalling()){

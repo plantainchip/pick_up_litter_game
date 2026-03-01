@@ -1,8 +1,8 @@
 # to do
 
-- [ ] lose condition - hit a pothole 3 times and lose 
-- [ ] garbage bins
-- [ ] empty bag mechanic
+- [x] lose condition - hit a pothole 3 times and lose 
+- [x] garbage bins
+- [x] empty bag mechanic
 - [ ] bag slow down mechanic
 - [ ] title screen
 - [ ] game over screen
@@ -16,4 +16,5 @@
 - [ ] pickup item effect
 - [ ] animation for waves
 - [ ] animation for progress bar
+- [ ] animation for losing
 
