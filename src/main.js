@@ -45,6 +45,9 @@ loadSprite("pothole","./sprites/780x360sprites/pothole.png")
 loadSprite("progress_bar","./sprites/780x360sprites/progress_bar.png")
 loadSprite("green_bar","./sprites/780x360sprites/green_bar.png")
 loadSprite("garbagebin","./sprites/780x360sprites/garbagebin.png")
+loadSprite("people1","./sprites/780x360sprites/people1.png")
+loadSprite("people2","./sprites/780x360sprites/people2.png")
+loadSprite("people3","./sprites/780x360sprites/people3.png")
 loadSprite("playerAnims","./sprites/780x360sprites/player_animations_bike_jump_fall.png",{
     sliceX: 6,
     sliceY: 1,
@@ -66,7 +69,10 @@ loadSprite("playerAnims","./sprites/780x360sprites/player_animations_bike_jump_f
 });
 
 window.STATE = {
-    garbage_picked_up: 0
+    garbage_picked_up: 0,
+    fast_speed: 300,
+    medium_speed: 200,
+    slow_speed: 100,
 }
 
 scene("game",gameloop);

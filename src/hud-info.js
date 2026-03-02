@@ -35,7 +35,7 @@ export function headsupdisplay(){
             STATE.garbage_picked_up
         } else {
             STATE.garbage_picked_up += 6
-            scoreLabel.value+=1
+            scoreLabel.value+=10
             scoreLabel.text = scoreLabel.value
         }
         green_bar.scale = vec2(STATE.garbage_picked_up,1)
@@ -68,6 +68,17 @@ export function headsupdisplay(){
             })
         }
     })
+    onCollide("player_bicycle","people1",()=> {
+        STATE.garbage_picked_up = 0
+        livesLabel.value-=1
+        livesLabel.text = "x"+livesLabel.value
+        green_bar.scale = vec2(STATE.garbage_picked_up,1)
+        if(livesLabel.value == 0){
+            wait(1,()=>{
+                go("gameover")
+            })
+        }
+    })
 
     let binCollided = false;
     let pressE = false;
@@ -90,10 +101,9 @@ export function headsupdisplay(){
             //score for bin
             scoreLabel.value+=100
             scoreLabel.text = scoreLabel.value
-    }
+        }
     })
 
-    
 
 
 }

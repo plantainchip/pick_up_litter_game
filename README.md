@@ -6,8 +6,9 @@
 - [ ] bag slow down mechanic
 - [ ] title screen
 - [ ] game over screen
-- [ ] add people to seawall randomly
+- [x] add people1 to seawall randomly
 - [ ] add running dog
+- [ ] change player sprite when hit
 
 ### would like to do
 - [ ] add kites
@@ -17,4 +18,10 @@
 - [ ] animation for waves
 - [ ] animation for progress bar
 - [ ] animation for losing
+- [ ] achivements
 
+### note to self
+
+- currently working on 'change player sprite when hit'
+- changes in player-info.js
+- todo: swap color with animation sprite in onCollide & onCollideEnd

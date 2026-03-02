@@ -41,28 +41,11 @@ export function bicyclePlayer(){
 
     // this here for jump -------
     onKeyPress("w", () => {
-        // console.log(player.curPlatform()._tags.has("bottomroad"))
-        // player.collisionIgnore = ["toproad","bench"]
-
-        // if(player.curPlatform()._tags.has("bottomroad")){
-        //     console.log(player.curPlatform()._tags.has("bottomroad"))
-        //     player.collisionIgnore = ["pothole"]
-        // }
         
         if(player.isGrounded()){
             player.jump(500);
         }
     })
-
-    // onKeyDown("w", () => {
-    //     // const p = player.curPlatform();
-    //     // if(player.curPlatform()._tags.has("bottomroad")){
-    //     //     console.log(player.curPlatform()._tags.has("bottomroad"))
-    //     //     setGravityDirection(UP);
-    //     // }
-    // });
-
-        
 
     // if the platform has platform effector component, ignore it when press s to fall through
     onKeyPress("s", () => {
@@ -81,34 +64,15 @@ export function bicyclePlayer(){
         if(player.pos.x != 200){
             player.moveTo(200,player.pos.y,100)
         }
-        // if(player_bicycle.pos.x != 205){
-        //     player_bicycle.moveTo(205,player_bicycle.pos.y,100)
-        // }
     });
 
-    // Collision with floor
-    
-    // onCollideUpdate("bean", "seawallfloor", (a,b,c) => {
-    //     player.moveTo(200, player.pos.y, 100)
-    // })
+    onCollide("player_bicycle","pothole",()=>{
+        player.color = (0,0,10,100)
+    })
 
-    // onCollideUpdate("bean", "toproad", (a,b,c) => {
-    //     player.moveTo(200, player.pos.y, 100)
-    // })
-
-    // onCollideUpdate("bean", "bottomroad", (a,b,c) => {
-    //     player.moveTo(200, player.pos.y, 100)
-    // })
-
-    // onCollideUpdate("bean", "bench", (a,b,c) => {
-    //     player.moveTo(200, player.pos.y, 100)
-    // })
-
-    // onCollide("bean", "pothole", () => {
-    //     addKaboom(vec2(200,player.pos.y - 50))
-    // })
-
-
+    onCollideEnd("player_bicycle","pothole",()=>{
+        player.color = (0,0,0,0)
+    })
 
     return player, player_bicycle
 
