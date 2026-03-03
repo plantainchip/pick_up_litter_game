@@ -26,9 +26,9 @@ export function bicyclePlayer(){
 
     // Player default animation function
     const playerPlayBike = () => {
-    if (player.isGrounded() && player.getCurAnim().name !== "bike") {
-        player.play("bike");
-    }
+        if (player.isGrounded() && player.getCurAnim().name !== "bike") {
+            player.play("bike");
+        }
     };
 
     onKeyRelease(["w"], () => {
@@ -41,8 +41,8 @@ export function bicyclePlayer(){
 
     // this here for jump -------
     onKeyPress("w", () => {
-        
         if(player.isGrounded()){
+            player.play("jump")
             player.jump(500);
         }
     })
@@ -67,12 +67,20 @@ export function bicyclePlayer(){
     });
 
     onCollide("player_bicycle","pothole",()=>{
-        player.color = (0,0,10,100)
+        player.play("hurt")
+        shake(5)
+        wait(0.3,()=>{
+            player.play("bike")
+        })
+    })
+    onCollide("player_bicycle","people1",()=>{
+        player.play("hurt")
+        shake(5)
+        wait(0.3,()=>{
+            player.play("bike")
+        })
     })
 
-    onCollideEnd("player_bicycle","pothole",()=>{
-        player.color = (0,0,0,0)
-    })
 
     return player, player_bicycle
 

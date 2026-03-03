@@ -48,8 +48,12 @@ loadSprite("garbagebin","./sprites/780x360sprites/garbagebin.png")
 loadSprite("people1","./sprites/780x360sprites/people1.png")
 loadSprite("people2","./sprites/780x360sprites/people2.png")
 loadSprite("people3","./sprites/780x360sprites/people3.png")
-loadSprite("playerAnims","./sprites/780x360sprites/player_animations_bike_jump_fall.png",{
-    sliceX: 6,
+loadSprite("text_title","./sprites/780x360sprites/text_title.png")
+loadSprite("gameover_screen","./sprites/780x360sprites/gameover_screen.png")
+
+
+loadSprite("playerAnims","./sprites/780x360sprites/player_animations_bike4_jump1_fall1_hurt2.png",{
+    sliceX: 8,
     sliceY: 1,
     anims: {
         bike: {
@@ -64,7 +68,11 @@ loadSprite("playerAnims","./sprites/780x360sprites/player_animations_bike_jump_f
         fall: {
             from: 5,
             to: 5,
-        }
+        },
+        hurt: {
+            from: 7,
+            to:7,
+        },
     }
 });
 
@@ -79,12 +87,126 @@ scene("game",gameloop);
 scene("gameover",gameover);
 
 scene("start",()=>{
-    setBackground(34,97,230)
-    add([
-        text("start"),
-        pos(center()),
-        anchor("center"),
+        add([sprite("00sky")])
+    // add([sprite("01cloud")])
+
+
+    const cloudpanel1 = add([
+        sprite("01cloud"),
+        pos(0,0),
+        move(LEFT, 8),
     ])
+
+    const cloudpanel2 = add([
+        sprite("01cloud"),
+        pos(780,0),
+        move(LEFT, 8),
+    ])
+
+    const shipspanel1 = add([
+        sprite("02ships"),
+        pos(0,0),
+        move(LEFT, 8),
+    ])
+
+    const shipspanel2 = add([
+        sprite("02ships"),
+        pos(780,0),
+        move(LEFT, 8),
+    ])
+
+    const oceanpanel1 = add([
+        sprite("03atlantic"),
+        pos(0,0),
+        move(LEFT, 24),
+    ])
+
+    const oceanpanel2 = add([
+        sprite("03atlantic"),
+        pos(780,0),
+        move(LEFT, 24),
+    ])
+
+    const seawallpanel1 = add([
+        sprite("04seawall"),
+        pos(0,0),
+        move(LEFT,100),
+    ])
+
+    const seawallpanel2 = add([
+        sprite("04seawall"),
+        pos(780,0),
+        move(LEFT, 100),
+    ])
+
+    const grasspanel1 = add([
+        sprite("05grass"),
+        pos(0,0),
+        move(LEFT, 100+10),
+        z(2)
+    ])
+
+    const grasspanel2 = add([
+        sprite("05grass"),
+        pos(780,0),
+        move(LEFT, 100+10),
+        z(2)
+    ])
+
+
+    onUpdate(() => {
+        if(cloudpanel1.pos.x < (-779)){
+            cloudpanel1.moveTo(780,0)
+        }
+        if(cloudpanel2.pos.x < (-779)){
+            cloudpanel2.moveTo(780,0)
+        }
+
+        if(oceanpanel1.pos.x < (-779)){
+            oceanpanel1.moveTo(780,0)
+        }
+        if(oceanpanel2.pos.x < (-779)){
+            oceanpanel2.moveTo(780,0)
+        }
+
+        if(shipspanel1.pos.x < (-779)){
+            shipspanel1.moveTo(780,0)
+        }
+        if(shipspanel2.pos.x < (-779)){
+            shipspanel2.moveTo(780,0)
+        }
+
+        if(seawallpanel1.pos.x < (-779)){
+            seawallpanel1.moveTo(780,0)
+        }
+        if(seawallpanel2.pos.x < (-779)){
+            seawallpanel2.moveTo(780,0)
+        }
+
+        if(grasspanel1.pos.x < (-779)){
+            grasspanel1.moveTo(780,0)
+        }
+        if(grasspanel2.pos.x < (-779)){
+            grasspanel2.moveTo(780,0)
+        }
+
+    })
+    add([
+        sprite("text_title"),
+    ])
+
+    // Player components
+    const player = add([
+        sprite("playerAnims"), 
+        pos(width()/2 -20, 300), 
+        anchor("bot"),
+        body({isStatic:true}),
+        z(1),
+        animate(),
+        "bean"
+    ]);
+    player.play("bike")
+
     onKeyPress((key) => {
         go("game", );
     })

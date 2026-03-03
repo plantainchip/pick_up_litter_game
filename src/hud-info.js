@@ -95,7 +95,6 @@ export function headsupdisplay(){
         pressE = true;
 
         if(binCollided+pressE == 2){
-            debug.log("trash")
             STATE.garbage_picked_up = 0;
             green_bar.scale = vec2(STATE.garbage_picked_up,1);
             //score for bin

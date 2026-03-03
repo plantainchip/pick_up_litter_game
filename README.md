@@ -4,13 +4,13 @@
 - [x] garbage bins
 - [x] empty bag mechanic
 - [ ] bag slow down mechanic
-- [ ] title screen
-- [ ] game over screen
+- [x] title screen
+- [x] game over screen
 - [x] add people1 to seawall randomly
-- [ ] add running dog
-- [ ] change player sprite when hit
+- [x] change player sprite when hit & added shake
 
 ### would like to do
+- [ ] add running dog
 - [ ] add kites
 - [ ] add birds
 - [ ] add 1 new background and transition
@@ -21,7 +21,3 @@
 - [ ] achivements
 
 ### note to self
-
-- currently working on 'change player sprite when hit'
-- changes in player-info.js
-- todo: swap color with animation sprite in onCollide & onCollideEnd
